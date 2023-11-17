@@ -78,7 +78,7 @@ int main() {
      printf("\n\t> Post-Order Traversal\n\t\t");
      postorderDisplay (head);
 
-     printf("\n<< 3. Delete an Element From the Tree >>\n");
+     printf("\n\n<< 3. Delete an Element From the Tree >>\n");
 
      printf("\n\n<< END >>\n\n");
      return 0;

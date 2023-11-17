@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #define MAX 15
 
-//typedef struct definitions
+//typedef definitions
 typedef enum BOOL {FALSE, TRUE} Boolean;
 
 typedef struct treeNode {
@@ -126,13 +126,10 @@ void insertMember (treePtr *treeHead, int elem) {
      }
 }
 
-//how to visit each node with tree traversals in code?
-//isnt that recursion? how recursion? and what is iterative? what is recursion vs iterative?
-
-void inorderDisplay (treePtr headPtr) {
-     if (headPtr != NULL) {
-          inorderDisplay (headPtr->left);
-          printf("[%d]", headPtr->data);
+void inorderDisplay (treePtr headPtr) {                
+     if (headPtr != NULL) {                            //visits every left child, prints the data pasaka once it reaches the bottom
+          inorderDisplay (headPtr->left);              //after printing each left child, then to parent, then to right child
+          printf("[%d]", headPtr->data);               //function is removed from execution stack once condition meets NULL
           inorderDisplay (headPtr->right);
      }
 }

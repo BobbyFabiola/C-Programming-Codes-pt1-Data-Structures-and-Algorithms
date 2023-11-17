@@ -1,5 +1,5 @@
 /*   Author:        Fabiola Villanueva
- *   Description:   Linked List Implementation of Trees (unique elements)
+ *   Description:   Linked List Implementation of Trees (Iterative)
  *   Date:          Nov 15, 2023
  */
 
@@ -21,10 +21,10 @@ Boolean initialize (treePtr *treeHead);
 void insertSet (treePtr *treeHead, int arr[]);
 Boolean isMember (treePtr treeHead, int elem);
 void insertMember (treePtr *treeHead, int elem);
-// void postorderDisplay ();
-// void preorderDisplay ();
-// void inorderDisplay ();
-// void delete ();
+void inorderDisplay (treePtr headPtr);
+void preorderDisplay (treePtr headPtr);
+void postorderDisplay (treePtr headPtr);
+// void deleteMember (treePtr treeHead, int elem);
 
 int main() {
      system ("cls");
@@ -33,6 +33,7 @@ int main() {
      int i, elem;
      Boolean ans = TRUE;
 
+     printf("<< BEGIN >>\n\n");
      printf("<< 0. Initialize >>\n");
      if (initialize (&head)) {
           printf("\thead = NULL\n");
@@ -66,7 +67,18 @@ int main() {
           }
      } while (ans == TRUE);
 
+     printf("\n<< 2. Displaying Binary Search Tree >>\n");
+     
+     printf("\n\t> Inorder Traversal\n\t\t");
+     inorderDisplay (head);
 
+     printf("\n\t> Pre-Order Traversal\n\t\t");
+     preorderDisplay (head);
+
+     printf("\n\t> Post-Order Traversal\n\t\t");
+     postorderDisplay (head);
+
+     printf("\n<< 3. Delete an Element From the Tree >>\n");
 
      printf("\n\n<< END >>\n\n");
      return 0;
@@ -87,26 +99,26 @@ void insertSet (treePtr *treeHead, int arr[]) {
      }
 }
 
-Boolean isMember (treePtr treeHead, int elem) {
-     while (treeHead != NULL && treeHead->data != elem) {
+Boolean isMember (treePtr treeHead, int elem) {                                           //recommendation: isMember will return the address of elem if found,
+     while (treeHead != NULL && treeHead->data != elem) {                                 //else return the pointer pointing to NULL
           treeHead = (elem < treeHead->data) ? treeHead->left: treeHead->right;
      }
-     return (treeHead != NULL) ? TRUE: FALSE;     //is a member if trav is pointing to an existing node
+     return (treeHead != NULL) ? TRUE: FALSE;                                             //is a member if trav is pointing to an existing node
 }
 
 void insertMember (treePtr *treeHead, int elem) {
      treePtr *trav = treeHead, temp;
 
-     if (isMember(*trav, elem) == FALSE) {
-          printf("\t[%d] is a unique element. Inserting into tree...\n", elem);
+     if (isMember(*trav, elem) == FALSE) {                                                //recommenadtion: if isMember returns a pointer to NULL then insert elem
+          printf("\t[%d] is a unique element. Inserting into tree...\n", elem);           //else, that means that if pointer is a node, then elem is a member of tree
           
           temp = malloc(sizeof(treeType));
           temp->left = NULL; 
           temp->right = NULL;
           temp->data = elem;
 
-          while (*trav != NULL && (*trav)->data != elem) {
-               trav = (elem < (*trav)->data) ? &(*trav)->left: &(*trav)->right;
+          while (*trav != NULL) {                                                         //with recommendations applied, there will no longer be another traversal 
+               trav = (elem < (*trav)->data) ? &(*trav)->left: &(*trav)->right;           //to locate the position to insert the elem
           }
           *trav = temp;
      } else {
@@ -116,3 +128,27 @@ void insertMember (treePtr *treeHead, int elem) {
 
 //how to visit each node with tree traversals in code?
 //isnt that recursion? how recursion? and what is iterative? what is recursion vs iterative?
+
+void inorderDisplay (treePtr headPtr) {
+     if (headPtr != NULL) {
+          inorderDisplay (headPtr->left);
+          printf("[%d]", headPtr->data);
+          inorderDisplay (headPtr->right);
+     }
+}
+
+void preorderDisplay (treePtr headPtr) {
+     if (headPtr != NULL) {
+          printf("[%d]", headPtr->data);
+          preorderDisplay (headPtr->left);
+          preorderDisplay (headPtr->right);
+     }
+}
+
+void postorderDisplay (treePtr headPtr) {
+     if (headPtr != NULL) {
+          preorderDisplay (headPtr->left);
+          preorderDisplay (headPtr->right);
+          printf("[%d]", headPtr->data);
+     }
+}

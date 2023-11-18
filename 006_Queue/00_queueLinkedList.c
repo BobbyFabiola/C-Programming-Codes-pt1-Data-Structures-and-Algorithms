@@ -99,8 +99,7 @@ void displayQueue (queue Q) {
 }
 
 void enQueueTask (queue *Q, STRING taskElem) {         //insert via rear
-     nodePtr temp;
-     temp = malloc (sizeof (nodePtr));                 //create node to insert
+     nodePtr temp = malloc (sizeof (nodeType));        //create node to insert
      temp->next = NULL;
      strcpy (temp->data, taskElem);                    //string copy user input of task into node
      

@@ -17,14 +17,14 @@ typedef struct treeNode {
 } treeType, *treePtr;
 
 //function prototypes
-Boolean initialize (treePtr *treeHead);
-void insertSet (treePtr *treeHead, int arr[]);
-Boolean isMember (treePtr treeHead, int elem);
-void insertMember (treePtr *treeHead, int elem);
+Boolean initialize (treePtr *root);
+void insertSet (treePtr *root, int arr[]);
+Boolean isMember (treePtr root, int elem);
+void insertMember (treePtr *root, int elem);
 void inorderDisplay (treePtr headPtr);
 void preorderDisplay (treePtr headPtr);
 void postorderDisplay (treePtr headPtr);
-// void deleteMember (treePtr treeHead, int elem);
+// void deleteMember (treePtr root, int elem);
 
 int main() {
      system ("cls");
@@ -85,29 +85,29 @@ int main() {
 }
 
 //function definition
-Boolean initialize (treePtr *treeHead) {
-     *treeHead = NULL;
-     return (*treeHead == NULL) ? TRUE: FALSE;
+Boolean initialize (treePtr *root) {
+     *root = NULL;
+     return (*root == NULL) ? TRUE: FALSE;
 }
 
-void insertSet (treePtr *treeHead, int arr[]) {
+void insertSet (treePtr *root, int arr[]) {
      treePtr temp;
      int i;
 
      for (i = 0; i < MAX; ++i) {                  //per iteration of the array is an element to insert into the tree
-          insertMember (treeHead, arr[i]);        //if unique element then insert into tree
+          insertMember (root, arr[i]);        //if unique element then insert into tree
      }
 }
 
-Boolean isMember (treePtr treeHead, int elem) {                                           //recommendation: isMember will return the address of elem if found,
-     while (treeHead != NULL && treeHead->data != elem) {                                 //else return the pointer pointing to NULL
-          treeHead = (elem < treeHead->data) ? treeHead->left: treeHead->right;
+Boolean isMember (treePtr root, int elem) {                                           //recommendation: isMember will return the address of elem if found,
+     while (root != NULL && root->data != elem) {                                 //else return the pointer pointing to NULL
+          root = (elem < root->data) ? root->left: root->right;
      }
-     return (treeHead != NULL) ? TRUE: FALSE;                                             //is a member if trav is pointing to an existing node
+     return (root != NULL) ? TRUE: FALSE;                                             //is a member if trav is pointing to an existing node
 }
 
-void insertMember (treePtr *treeHead, int elem) {
-     treePtr *trav = treeHead, temp;
+void insertMember (treePtr *root, int elem) {
+     treePtr *trav = root, temp;
 
      if (isMember(*trav, elem) == FALSE) {                                                //recommenadtion: if isMember returns a pointer to NULL then insert elem
           printf("\t[%d] is a unique element. Inserting into tree...\n", elem);           //else, that means that if pointer is a node, then elem is a member of tree

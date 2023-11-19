@@ -1,6 +1,8 @@
-/*   Author:        Fabiola Villanueva
- *   Description:   Linked List Implementation of Trees (Iterative)
- *   Date:          Nov 15, 2023
+/*   Author:             Fabiola Villanueva
+ *   Description:        Linked List Implementation of Binary Search Trees (Iterative)
+ *                       Personal Project
+ *   Specifications:     Iterative (~insertion, !tree traversal)
+ *   Date:               Nov 15, 2023
  */
 
 #include <stdio.h>
@@ -21,9 +23,9 @@ Boolean initialize (treePtr *root);
 void insertSet (treePtr *root, int arr[]);
 Boolean isMember (treePtr root, int elem);
 void insertMember (treePtr *root, int elem);
-void inorderDisplay (treePtr headPtr);
-void preorderDisplay (treePtr headPtr);
-void postorderDisplay (treePtr headPtr);
+void inorderDisplay (treePtr root);
+void preorderDisplay (treePtr root);
+void postorderDisplay (treePtr root);
 // void deleteMember (treePtr root, int elem);
 
 int main() {
@@ -99,11 +101,11 @@ void insertSet (treePtr *root, int arr[]) {
      }
 }
 
-Boolean isMember (treePtr root, int elem) {                                           //recommendation: isMember will return the address of elem if found,
-     while (root != NULL && root->data != elem) {                                 //else return the pointer pointing to NULL
+Boolean isMember (treePtr root, int elem) {                                               //recommendation: isMember will return the address of elem if found,
+     while (root != NULL && root->data != elem) {                                         //else return the pointer pointing to NULL
           root = (elem < root->data) ? root->left: root->right;
      }
-     return (root != NULL) ? TRUE: FALSE;                                             //is a member if trav is pointing to an existing node
+     return (root != NULL) ? TRUE: FALSE;                                                  //is a member if trav is pointing to an existing node
 }
 
 void insertMember (treePtr *root, int elem) {
@@ -126,7 +128,7 @@ void insertMember (treePtr *root, int elem) {
      }
 }
 
-void inorderDisplay (treePtr headPtr) {                
+void inorderDisplay (treePtr headPtr) {                //recursive
      if (headPtr != NULL) {                            //visits every left child, prints the data pasaka once it reaches the bottom
           inorderDisplay (headPtr->left);              //after printing each left child, then to parent, then to right child
           printf("[%d]", headPtr->data);               //function is removed from execution stack once condition meets NULL

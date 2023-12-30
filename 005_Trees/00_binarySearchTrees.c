@@ -26,7 +26,7 @@ void insertMember (treePtr *root, int elem);
 void inorderDisplay (treePtr root);
 void preorderDisplay (treePtr root);
 void postorderDisplay (treePtr root);
-// void deleteMember (treePtr root, int elem);
+void deleteMember (treePtr *root, int elem);
 
 int main() {
      system ("cls");
@@ -151,3 +151,7 @@ void postorderDisplay (treePtr headPtr) {
           printf("[%d]", headPtr->data);
      }
 }
+
+// void deleteMember (treePtr *root, int elem) {                                                  //we are traversing using a parent pointer
+//      if (isMember (*root, elem))
+// }

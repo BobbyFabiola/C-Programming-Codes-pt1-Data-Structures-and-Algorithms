@@ -111,3 +111,5 @@ void inputStud (studType *entity) {                            //function to pop
    scanf("%d", &entity->gender);
    printf("\t<< >>\n");
 }
+
+//TODO sza test hello world

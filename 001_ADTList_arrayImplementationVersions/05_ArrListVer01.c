@@ -43,7 +43,9 @@ int main () {
    }
 
    printf("1. Create Student Record");
-   while (registerPrompt (&studList));
+   while (registerPrompt (&studList));                         //while resgister prompt is true, promt will loop
+
+
 
 
    printf("\n\n");
@@ -67,11 +69,17 @@ BOOL registerPrompt (LIST *L) {                                //pass the studLi
 }
 
 void insertStudent (LIST *L) {
+   int idx, i;
    studType student;
    inputStud (&student);                                       //pass to populate student fields
 
    L->studArr[L->count++] = student;                           //insertRear
-   //TODO implement inserted sorted
+   
+   //TODO implement inserted sorted via last name (if last names are equal then compare via first name)
+   if (L->count < MAX) {                                       //if count is not reached the max number of elements (which is less than the actual size)
+   
+   }
+
 }
 
 void inputStud (studType *entity) {                            //function to populate an entity of studType via user input

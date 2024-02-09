@@ -1,0 +1,25 @@
+Practice Exercises for Linked Lists
+
+1. Basic Operations
+    insert front / rear / at / sorted
+    delete front / rear / at
+    search an element
+2. Traversal
+    print all elements
+    reverse the linked list
+3. Merging and Splitting
+    create two linked lists and merge into a single sorted linked lists
+    given a linked list, create a function to split it into two halves
+4. Detecting and Handling Loops
+    implement function to detect if linked list has a loop
+    write a function to remove a loop in a linked list if one is detected 
+5. Sorting 
+    merge sort
+    insertion sort
+6. Counting and Removing Duplicates
+    write a function to count the number of occurences of a specific value in a linked list
+    implement a function to remove duplicate elements fromm an unsorted linked list
+7. Circular Linked List
+    implement and perform basic Operations
+8. Memory Management
+    pay attention to memory allocation and deallocation in your linked list operations to avoid memory leaks

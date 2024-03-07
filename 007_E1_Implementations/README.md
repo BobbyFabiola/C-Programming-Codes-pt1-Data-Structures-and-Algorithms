@@ -36,37 +36,3 @@ EXAM 1: Pre-midterm Topics
             Solution 2:  Queue is full if there are MAX-1 elements 
                           where MAX is the size of the array
     d. Time Complexity:  O(1) and O(N)
-
-#define MAX 10
-
-//structure definition
-typedef struct {
-    char LName[20], Fname[16], Mi;
-} nameType;
-
-typedef struct {
-    nameType name;
-    int ID, year;
-    char course[8];
-} studType;
-
-typedef struct {
-    studType studList[MAX];
-    int count;
-} LIST;
-
-typedef enum {TRUE, FALSE} Boolean;
-
-//function prototypes
-void initialize ();
-void display ();
-void insertFirst ();
-void insertLast ();
-void insertAt ();
-void insertSorted ();
-void deleteFirst ();
-void deleteLast ();
-void deleteAtPos ();
-void deleteAtElem ();
-Boolean isMember ();
-studType locateElem ();

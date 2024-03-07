@@ -65,7 +65,7 @@ int main () {
 
     printf("\n\n<< END >>");
     return 0;
-}
+} 
 
 void populateLL (studLink *L, studRec arr[]) {
     studLink temp;

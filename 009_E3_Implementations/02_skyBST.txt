@@ -1,0 +1,29 @@
+void deleteChild(BST *T, int target) {
+	BST *trav = T, temp;
+	while((*trav) != NULL && (*trav)->data != target) {				//search for the element in the bst
+		if((*trav)->data < target) {
+			trav = &(*trav)->RC;
+		} else {
+			trav = &(*trav)->LC;
+		}
+	} 
+	if((*trav) != NULL) {								//if element is found
+		if((*trav)->LC == NULL && (*trav)->RC == NULL) {			//if leaf
+			temp = (*trav);							//temp takes node to delete
+			(*trav) = (*trav)->RC;						//*trav is set to NULL
+			free(temp);
+		} else if((*trav)->LC == NULL && (*trav)->RC != NULL) {			//if right child
+			temp = (*trav);
+			(*trav) = temp->RC;
+			free(temp);
+		} else if ((*trav)->RC == NULL && (*trav)->LC != NULL){			//if left child
+			temp = (*trav);
+			(*trav) = temp->LC;
+			free(temp);
+		} else {								//if two children
+			BST *trav2;
+			for(trav2 = trav; (*trav2) != NULL; trav = &(*trav)->LC){}	//traverse from pointer pointing to node to delete until node pointer is NULL;
+			(*trav)->data = (*trav2)->data;					//	you are ending at the LC pointer of your last node, error perhaps?
+		}
+	}
+}

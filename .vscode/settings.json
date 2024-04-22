@@ -1,7 +1,8 @@
 {
    "files.associations": {
       "04_arrlistver01": "c",
-      "05_arrlistver01": "c"
+      "05_arrlistver01": "c",
+      "limits": "c"
    },
    "C_Cpp.errorSquiggles": "disabled"
 }

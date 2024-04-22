@@ -21,6 +21,7 @@ Boolean insertElem (nodePtr *T, int elem);
 Boolean populateTree (nodePtr *T, int arr[]);
 Boolean isMember (nodePtr T, int elem);
 Boolean deleteElem (nodePtr *T, int elem);
+
 void preOrder (nodePtr T);
 void inOrder (nodePtr T);
 void postOrder (nodePtr T);

@@ -39,7 +39,7 @@ void displayMatrixSP (adjMatrix spMatrix);
 //* MAIN
 int main () {
     system ("cls");
-
+    
     printf("\nProblem #1::  THE MATRIX"); 
    	printf("\n------------"); 
 
@@ -52,8 +52,9 @@ int main () {
     printf("\n\nProblem #2::  WARSHALL BY TRANSITIVE CLOSURE"); 
    	printf("\n------------");
 
-    BooleanMatrix TCW; // Initialize the first row
-    for (int i = 1; i < MAX_VERTEX; ++i) {
+    BooleanMatrix TCW;
+    int i;
+    for (i = 0; i < MAX_VERTEX; ++i) {
         for (int j = 0; j < MAX_VERTEX; ++j) {
             TCW[i][j] = FALSE;
         }
@@ -88,12 +89,20 @@ void initAdjMatrix (adjMatrix *M) {
 void populateAdjacencyMatrix (adjMatrix *M) {
     //data of edges
     int count = 10;
+    // int count = 6;
     edgeType arr[] = {     
         {'A', 'B', 4}, {'A', 'D', 5},
         {'B', 'C', 1}, {'B', 'E', 6},
         {'C', 'A', 1}, {'C', 'D', 3},
         {'D', 'C', 1}, {'D', 'E', 2},
         {'E', 'A', 1}, {'E', 'D', 4}
+        
+        //Bryan's data set
+        // {'A', 'B', 2}, {'A', 'D', 1},
+        // {'B', 'C', 3}, 
+        // {'C', 'D', 2},
+        // {'D', 'E', 1},
+        // {'E', 'C', 1}
     };
 
     int x;
@@ -125,7 +134,7 @@ void displayMatrix  (adjMatrix M) {
 }
 
 //! PROBLEM 2
-void warshallTransitiveClosure (adjMatrix M, BooleanMatrix *W) { //? DEBUG LATER
+void warshallTransitiveClosure (adjMatrix M, BooleanMatrix *W) {
     int a, b, c;
 
     //copy entries from adjacency matrix into boolean
@@ -137,11 +146,11 @@ void warshallTransitiveClosure (adjMatrix M, BooleanMatrix *W) { //? DEBUG LATER
         }
     }
 
-    //warshall matters: if a is reachable from b VIA c and if a is reachable from a and b
+    //warshall matters: if there is a path from a to b and a path from b to c then there is a path from a to c
     for (a = 0; a < MAX_VERTEX; ++a) {
         for (b = 0; b < MAX_VERTEX; ++b) {
             for (c = 0; c < MAX_VERTEX; ++c) {
-                if ((*W)[b][a] == TRUE && (*W)[a][c] == TRUE) {
+                if ((*W)[b][a] == TRUE && (*W)[a][c] == TRUE) { //!
                     (*W)[b][c] = TRUE;
                 }
             }
@@ -182,9 +191,12 @@ void floyWarshallAlgo (adjMatrix M, adjMatrix *spMatrix) {
     for (a = 0; a < MAX_VERTEX; ++a) {
         for (b = 0; b < MAX_VERTEX; ++b) {
             for (c = 0; c < MAX_VERTEX; ++c) {
-                if ((*spMatrix)[a][c] != SENTINEL && (*spMatrix)[c][b] != SENTINEL) {                   //check if degrees are sentinel
-                    (*spMatrix)[a][b] = ((*spMatrix)[a][c] + (*spMatrix)[c][b] < (*spMatrix)[a][b]) ?   //comparing minimum cost and value assignment
-                    (*spMatrix)[a][c] + (*spMatrix)[c][b]: (*spMatrix)[a][b];
+                if ((*spMatrix)[a][c] != SENTINEL && (*spMatrix)[c][b] != SENTINEL) {   //check if degrees are sentinel
+                    
+                    if ((*spMatrix)[a][c] + (*spMatrix)[c][b] < (*spMatrix)[a][b]) {
+                        (*spMatrix)[a][b] = (*spMatrix)[a][c] + (*spMatrix)[c][b];      //comparing minimum cost and value assignment
+                    }   
+
                 }
             }
         }

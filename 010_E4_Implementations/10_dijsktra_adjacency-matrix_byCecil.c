@@ -42,31 +42,33 @@ void bfs(int graph[MAX_SIZE][MAX_SIZE], int start) {
 
 // Function to perform Dijkstra's algorithm on an adjacency matrix
 int *dijkstra(int graph[MAX_SIZE][MAX_SIZE], int start) {
-    int *shortest_distances = (int*) calloc(MAX_SIZE, sizeof(int));
-    bool visited[MAX_SIZE] = {false};
 
-    if (shortest_distances != NULL) {
-        for (int i = 0; i < MAX_SIZE; i++)
+    int *shortest_distances = (int*) calloc(MAX_SIZE, sizeof(int));             //array to return
+    bool visited[MAX_SIZE] = {false};                                           //initialize visited boolean array to unvisited
+
+    if (shortest_distances != NULL) {                                           //if malloc successful
+        for (int i = 0; i < MAX_SIZE; i++) {
             shortest_distances[i] = INT_MAX;
+        }
+        shortest_distances[start] = 0;                                          //set SP[] to MAX and source to 0
 
-        shortest_distances[start] = 0;
-
-        for (int count = 0; count < MAX_SIZE - 1; count++) {
+        for (int count = 0; count < MAX_SIZE - 1; count++) {                    //? why -1 ?
             int min_distance = INT_MAX, min_index;
 
-            for (int v = 0; v < MAX_SIZE; v++) {
-                if (!visited[v] && shortest_distances[v] <= min_distance) {
+            for (int v = 0; v < MAX_SIZE; v++) {                                //* looks good 
+                if (!visited[v] && shortest_distances[v] <= min_distance) {     //! note: next vertex to visit will NOT be the first smallest
                     min_distance = shortest_distances[v];
                     min_index = v;
                 }
             }
 
-            visited[min_index] = true;
+            visited[min_index] = true;                                          //mark current index as visited in boolean array
 
             for (int v = 0; v < MAX_SIZE; v++) {
-                if (!visited[v] && graph[min_index][v] != INT_MAX && shortest_distances[min_index] != INT_MAX &&  
-                                        shortest_distances[min_index] + graph[min_index][v] < shortest_distances[v]) {
-                    shortest_distances[v] = shortest_distances[min_index] + graph[min_index][v];
+                if (!visited[v] && graph[min_index][v] != INT_MAX && shortest_distances[min_index] != INT_MAX &&            //! if not visited(good), skips MAX values (?), skips over MAX values in cost array (?)
+                                        shortest_distances[min_index] + graph[min_index][v] < shortest_distances[v]) {      //! compares cost of current vertex's incident weight to current cost in records
+
+                    shortest_distances[v] = shortest_distances[min_index] + graph[min_index][v];        //* updating cost, looks good
                 }
             }
         }

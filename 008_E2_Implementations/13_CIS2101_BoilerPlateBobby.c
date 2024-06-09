@@ -224,6 +224,7 @@ char* getProgram(personalInfo I) {
 int yearLevelHash(personalInfo I) {
     //Write your code here
     return (((I & 12) >> 2) + 1) % YEARLEVELS;      //sauce from prof 
+    // return (I & 12) >> 2;
 }
 
 //---------------------------------------------------------------------------------------------

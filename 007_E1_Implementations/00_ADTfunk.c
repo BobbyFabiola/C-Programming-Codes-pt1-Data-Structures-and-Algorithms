@@ -62,6 +62,7 @@ int main () {
 
     //display the entire list
     printf("1. DISPLAY\n");
+    printf("\tNo student has been inserted into the list.\n");
     display (studRecords);
 
     printf("2. INSERT FIRST\n");

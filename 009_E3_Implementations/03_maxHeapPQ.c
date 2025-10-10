@@ -157,7 +157,6 @@ void insertIntoHeap (heapPQ *PQ, elemType elem) {                               
             PQ->list[parentIdx(idx)] = temp;
         }
     }
-
     //shifting method
     // if (PQ->lastIdx < MAX-1) {
     //     int trav;
